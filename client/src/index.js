@@ -5,18 +5,23 @@ import App from "./App";
 import { configureStore } from "@reduxjs/toolkit";
 import globalReducer from "state";
 import { Provider } from "react-redux";
+import { api } from "state/api";
+import { setupListeners } from "@reduxjs/toolkit/dist/query";
 
 const store = configureStore({
-    reducer: {
-        global: globalReducer,
-    },
+  reducer: {
+    global: globalReducer,
+    [api.reducerPath]: api.reducer,
+  },
+  middleware: (getDefault) => getDefault().concat(api.middleware),
 });
+setupListeners(store.dispatch);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    </React.StrictMode>
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>
 );
