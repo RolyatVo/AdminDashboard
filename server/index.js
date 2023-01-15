@@ -19,11 +19,13 @@ import {
   dataProductStat,
   dataTransaction,
   dataOverallStat,
+  dataAffiliateStat,
 } from "./data/index.js";
 import Product from "./models/Product.js";
 import ProductStat from "./models/ProductStat.js";
 import Transaction from "./models/Transaction.js";
 import OverallStat from "./models/OverallStat.js";
+import AffiliateStat from "./models/AffiliateStat.js";
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -43,7 +45,7 @@ app.use("/management", managementRoutes);
 app.use("/sales", salesRoutes);
 
 // MONGOOSE SETUP
-
+mongoose.set("strictQuery", false);
 const PORT = process.env.PORT || 9000;
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -58,6 +60,7 @@ mongoose
     //User.insertMany(dataUser);
     // Transaction.insertMany(dataTransaction);
     // OverallStat.insertMany(dataOverallStat);
+    // AffiliateStat.insertMany(dataAffiliateStat);
   })
   .catch(() => {
     console.log("DID NOT CONNECT TO MONGO");
