@@ -5,7 +5,8 @@ export const api = createApi({
   reducerPath: "adminApi",
   tagTypes: [
     "User",
-    "Products, Transactions",
+    "Products",
+    "Transactions",
     "Geography",
     "Sales",
     "Admins",
